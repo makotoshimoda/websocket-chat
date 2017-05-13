@@ -1,0 +1,9 @@
+.row.col-md-8.col-md-offset-2
+  .well
+    .chatroom-form
+      = form_for @room do |f|
+        .input-group
+          %span.input-group-addon name:
+          = f.text_field :name, class: "form-control"
+        = f.submit class: "btn btn-primary", id: "create-chatroom"
+  / = render partial: 'layouts/flash_errors'
