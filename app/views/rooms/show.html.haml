@@ -2,7 +2,7 @@
   %h1= @room.name
   .panel.panel-default
     - if @room.messages.any?
-      #messages.panel-body
+      #messages.panel-body.tab-panel{:style => "font-size: large;"}
         = render partial: 'messages/message', collection: @room.messages
     - else
       #messages.panel-body.hidden

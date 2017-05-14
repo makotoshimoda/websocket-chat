@@ -3,7 +3,10 @@
     .chatroom-form
       = form_for @room do |f|
         .input-group
-          %span.input-group-addon name:
+          %span.input-group-addon.text-center Name:
           = f.text_field :name, class: "form-control"
-        = f.submit class: "btn btn-primary", id: "create-chatroom"
-  / = render partial: 'layouts/flash_errors'
+        %br
+        = f.submit class: "btn btn-primary btn-lg center-block", id: "create-chatroom", :style => "width: 30%;margin: auto;"
+  / = button_to 'Back', rooms_path, :method => "get", :style => "width: 30%;margin: auto;", :class => "btn btn-lg"
+  %br
+  = render partial: 'layouts/errors'

@@ -1,19 +1,14 @@
-%h1 Listing rooms
-
-%table
+%h1.text-center Listing rooms
+%br
+%table.table.table-striped.table-bordered.table-condensed.table-responsive.text-center{:style => "width: 60%;margin: auto;"}
   %thead
     %tr
-      %th
-      %th
-      %th
+      %th.text-center{:style => "font-size: large;"} Chats
 
   %tbody
     - @rooms.each do |room|
       %tr
-        %td= link_to 'Show', room
-        %td= link_to 'Edit', edit_room_path(room)
-        %td= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }
-
+        %td= link_to room.name, room, :style => "font-size: large;"
 %br
-
-= link_to 'New Room', new_room_path
+.btn{:style => "width: 100%;margin: auto;"}
+  = button_to 'New Room', new_room_path, :method => "get", :style => "width: 30%;margin: auto;", :class => "btn-primary btn-lg"

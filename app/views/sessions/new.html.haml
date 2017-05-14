@@ -1,0 +1,12 @@
+.row
+  .col-md-8.col-md-offset-2
+    %h1.text-center Log in
+    .auth-form.well
+      = form_for(User.new, url: login_path) do |f|
+        .input-group
+          %span.input-group-addon.text-center Name:
+          = f.text_field :name, class: "form-control"
+        %br
+        .actions
+          = f.submit "Log In", :style => "width: 30%;margin: auto;", :class => "btn btn-primary btn-lg center-block"
+    = render partial: 'layouts/errors'

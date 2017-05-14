@@ -12,8 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
 // app/assets/javascripts/application.js
 
 //= require_tree ./channels
+
+$("#new_message").bind("ajax:complete", function(event,xhr,status){
+  $('#message-text').val('');
+})
