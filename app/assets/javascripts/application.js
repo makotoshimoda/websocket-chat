@@ -18,7 +18,3 @@
 // app/assets/javascripts/application.js
 
 //= require_tree ./channels
-
-$("#new_message").bind("ajax:complete", function(event,xhr,status){
-  $('#message-text').val('');
-})

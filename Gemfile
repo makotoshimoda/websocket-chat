@@ -40,6 +40,12 @@ gem 'haml-rails'
 
 #Bootstrap gem
 gem "twitter-bootstrap-rails"
+
+#Will_paginate Gem
+gem 'will_paginate-bootstrap'
+
+#Search gem
+gem 'ransack', github: 'activerecord-hackery/ransack'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

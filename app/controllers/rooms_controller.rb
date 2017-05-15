@@ -1,10 +1,12 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:show]
+  before_action :set_room, :search, only: [:show]
+  before_action :search
 
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all
+    @search = Room.search(params[:q])
+    @rooms = Room.all.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /rooms/1
@@ -43,4 +45,17 @@ class RoomsController < ApplicationController
     def room_params
       params.require(:room).permit(:name)
     end
+
+    #Search and redirect to the Chat
+    def search
+      if params[:q]
+        query = params[:q].to_unsafe_h[:name_or_id]
+        room = Room.where("name like '#{query}' or id = #{query.to_i}").try(:first)
+        unless room.nil?
+          redirect_to room
+        else
+          flash[:notice] = {error: ["Room not found"]}
+        end
+      end
+    end  
 end

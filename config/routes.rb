@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 	mount ActionCable.server => '/cable'
   resources :messages
   resources :rooms, param: :slug
-  resources :users
-  root "welcome#about"
+  # resources :users
+  root "welcome#home"
   
   get '/signup', to: "registrations#new"
   post '/signup', to: "registrations#create"

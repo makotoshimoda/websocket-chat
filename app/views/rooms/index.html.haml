@@ -1,14 +1,32 @@
 %h1.text-center Listing rooms
 %br
+.well{:style => "width: 60%;margin: auto;"}
+  .room-form
+    = search_form_for @search do |f|
+      .input-group
+        %span.input-group-addon.text-center Search:
+        = f.text_field (:name_or_id), class: "form-control"
+      %br
+      = f.submit "Search and Go", class: "btn btn-primary btn-lg center-block", :style => "width: 30%;margin: auto;"
+
+%br
+%div{:style => "width: 60%;margin: auto;"}      
+  = render partial: 'layouts/errors'
+
 %table.table.table-striped.table-bordered.table-condensed.table-responsive.text-center{:style => "width: 60%;margin: auto;"}
   %thead
     %tr
-      %th.text-center{:style => "font-size: large;"} Chats
+      %th.text-center{:style => "font-size: large;"} Name
 
   %tbody
     - @rooms.each do |room|
       %tr
-        %td= link_to room.name, room, :style => "font-size: large;"
+        %td= link_to room.name, room, :style => "font-size: large;", method: :get
+%br
+%div{:style => "width: 60%;margin: auto;"}
+  = will_paginate @rooms, renderer: BootstrapPagination::Rails
 %br
 .btn{:style => "width: 100%;margin: auto;"}
   = button_to 'New Room', new_room_path, :method => "get", :style => "width: 30%;margin: auto;", :class => "btn-primary btn-lg"
+
+
