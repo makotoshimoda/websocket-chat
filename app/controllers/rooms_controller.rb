@@ -29,7 +29,7 @@ class RoomsController < ApplicationController
       if @room.save
         format.html { redirect_to @room }
       else
-        flash[:notice] = {error: ["The name #{@room.name} was already taken by another room"]}
+        flash[:notice] = { error: ["The name #{@room.name} was already taken by another room"] }
         format.html { redirect_to new_room_path }
       end
     end
@@ -48,14 +48,15 @@ class RoomsController < ApplicationController
 
     #Search and redirect to the Chat
     def search
-      if params[:q]
-        query = params[:q].to_unsafe_h[:name_or_id]
-        room = Room.where("name like '#{query}' or id = #{query.to_i}").try(:first)
-        unless room.nil?
-          redirect_to room
-        else
-          flash[:notice] = {error: ["Room not found"]}
-        end
+      return unless params[:q]
+
+      query = params[:q].to_unsafe_h[:name_or_id]
+      room = Room.where('name like :query or id = :id', query: query, id: query.to_i).try(:first)
+      if room.blank?
+        flash[:notice] = { error: ['Room not found'] }
+      else
+        redirect_to room
       end
-    end  
+    end
+
 end

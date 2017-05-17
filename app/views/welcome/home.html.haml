@@ -9,5 +9,5 @@
       If you are not #{current_user.name}, you can Log Out clicking #{link_to "HERE", logout_path, method: "delete"}
   - else
     %p.text-center Sign up or Log in to start chatting.
-    %li.text-center{:style => "font-size: large;"} #{link_to "Sign Up", signup_path}
-    %li.text-center{:style => "font-size: large;"} #{link_to "Log In", login_path}
+    %li.text-center.large-text #{link_to "Sign Up", signup_path}
+    %li.text-center.large-text #{link_to "Log In", login_path}

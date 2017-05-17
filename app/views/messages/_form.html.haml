@@ -3,5 +3,5 @@
   = f.text_area :content, class: "form-control", data: {textarea: "message"}, id: "message-text"
   = f.hidden_field :room_id, value: room.id
   %br
-  %button.btn-primary.btn-lg{:type => "button", :id => "message-bt", :style => "width: 30%;margin: auto;"} Send
-  = f.submit "send", :id => "submit-message", data: {send: "message"}, :style => "display: none"
+  %button.btn-primary.btn-lg.btn-form{type: "button", id: "message-bt"} Send
+  = f.submit "send", id: "submit-message", data: {send: "message"}, style: "display: none"

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to rooms_path
     else
-      redirect_to login_path, flash[:notice] =  {Error: ["That User doesn't exist"]}
+      redirect_to login_path, flash[:notice] = { Error: ["That User doesn't exist"] }
     end
   end
 
