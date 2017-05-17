@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(user_params)
-    if user
-      session[:user_id] = user.id
+    @user = User.find_by(user_params)
+    if @user
+      session[:user_id] = @user.id
       redirect_to rooms_path
     else
       redirect_to login_path, flash[:notice] = { Error: ["That User doesn't exist"] }

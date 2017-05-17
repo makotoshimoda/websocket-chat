@@ -7,36 +7,36 @@ RSpec.describe RoomsController, type: :controller do
       slug: "new-chat" }
     end
 
-    before (:each) do
-      @user = FactoryGirl.create(:user)
-      @room = FactoryGirl.create(:room)
-      @message = FactoryGirl.create(:message)
-      @message.user = @user
-      @message.room = @room
-      session[:user_id] = @user.id
+  before (:each) do
+    @user = FactoryGirl.create(:user)
+    @room = FactoryGirl.create(:room)
+    @message = FactoryGirl.create(:message)
+    @message.user = @user
+    @message.room = @room
+    session[:user_id] = @user.id
+  end
+
+  describe "GET #index" do
+    it "responds successfully with an HTTP 200 status code" do
+      get :index
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
-    describe "GET #index" do
-      it "responds successfully with an HTTP 200 status code" do
-        get :index
-        expect(response).to be_success
-        expect(response).to have_http_status(200)
-      end
+    it "renders the index template" do
+      get :index
+      expect(response).to render_template("index")
+    end
+  end
 
-      it "renders the index template" do
-        get :index
-        expect(response).to render_template("index")
-      end
+  describe "GET #show" do
+    it "responds successfully with an HTTP 200 status code" do
+      get :show, params: { slug: @room.slug }
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
-    describe "GET #show" do
-      it "responds successfully with an HTTP 200 status code" do
-       get :show, params: { slug: @room.slug }
-       expect(response).to be_success
-       expect(response).to have_http_status(200)
-     end
-
-     it "should find the right room" do
+    it "should find the right room" do
       get :show, params: { slug: @room.slug }
       expect(assigns(:room)).to eq(@room)
     end
@@ -55,27 +55,27 @@ RSpec.describe RoomsController, type: :controller do
         expect {
           post :create, params:{ room: valid_attributes}
           }.to change(Room, :count).by(1)
-        end
-
-        it "assigns a newly created room as @room" do
-          post :create, params:{ room: valid_attributes}
-          expect(assigns(:room)).to be_a(Room)
-          expect(assigns(:room)).to be_persisted
-        end
-
-        it "redirects to the created room" do
-          post :create, params:{ room: valid_attributes}
-          expect(response).to redirect_to(Room.last)
-        end
       end
 
-      describe "with invalid params" do
-        it "assigns a newly created but unsaved room as @room" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(Room).to receive(:save).and_return(false)
-        post :create, params:{ room: {name: 1, slug: 23}}
-        expect(assigns(:room)).to be_a_new(Room)
+      it "assigns a newly created room as @room" do
+        post :create, params:{ room: valid_attributes}
+        expect(assigns(:room)).to be_a(Room)
+        expect(assigns(:room)).to be_persisted
       end
+
+      it "redirects to the created room" do
+        post :create, params:{ room: valid_attributes}
+        expect(response).to redirect_to(Room.last)
+      end
+    end
+
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved room as @room" do
+      # Trigger the behavior that occurs when invalid params are submitted
+      allow_any_instance_of(Room).to receive(:save).and_return(false)
+      post :create, params:{ room: {name: 1, slug: 23}}
+      expect(assigns(:room)).to be_a_new(Room)
+    end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
