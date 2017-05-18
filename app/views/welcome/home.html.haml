@@ -8,6 +8,4 @@
     %p.text-center
       If you are not #{current_user.name}, you can Log Out clicking #{link_to "HERE", logout_path, method: "delete"}
   - else
-    %p.text-center Sign up or Log in to start chatting.
-    %li.text-center.large-text #{link_to "Sign Up", signup_path}
-    %li.text-center.large-text #{link_to "Log In", login_path}
+    %p.text-center #{link_to "Sign Up", signup_path} or #{link_to "Log In", login_path} to start chatting.
