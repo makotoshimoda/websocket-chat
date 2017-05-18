@@ -10,7 +10,7 @@ Running Locally:
 
 *Mysql
 
-*Action Cable (Parte do Rails 5)
+*Action Cable 
 
 Then, once you clone this repo:
 
