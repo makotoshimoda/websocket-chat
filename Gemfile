@@ -44,6 +44,8 @@ gem "twitter-bootstrap-rails"
 #Will_paginate Gem
 gem 'will_paginate-bootstrap'
 
+gem 'active_model_serializers', '~> 0.10.6'
+gem 'active_hash_relation', github: 'kollegorna/active_hash_relation'
 #Search gem
 gem 'ransack', github: 'activerecord-hackery/ransack'
 group :development, :test do
